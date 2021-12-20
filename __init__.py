@@ -108,6 +108,7 @@ class MyAwSWMod(Mod):
     @classmethod
     def mod_load(cls):
         ml = modinfo.get_mods()["MagmaLink"].import_ml()
+        ml.register_mod_settings(cls, screen='invevrything_four_modsettings')
         chapter2inv(ml)
         chapter3inv(ml)
         chapter3archiveinv(ml)
