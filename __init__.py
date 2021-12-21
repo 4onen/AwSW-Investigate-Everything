@@ -1,5 +1,5 @@
 
-from renpy import ast, python
+from renpy import ast, python, store
 
 from modloader import modinfo
 from modloader.modclass import Mod, loadable_mod
@@ -15,9 +15,10 @@ def chapter2inv(ml):
 
     def condition_closure(hook):
         ast.next_node(hook.old_next)
-        valid = sum((python.py_eval(condition) for (_label, condition, _block) in c2inv_sec_menu.items))
-        if valid > 1:
-            ast.next_node(c2inv_sec_menu)
+        if store.persistent.invevrything_four_chapter2_limit != True:
+            valid = sum((python.py_eval(condition) for (_label, condition, _block) in c2inv_sec_menu.items))
+            if valid > 1:
+                ast.next_node(c2inv_sec_menu)
         return True
 
     c2inv_cont = ml.find_label('chap2cont').node
@@ -40,9 +41,10 @@ def chapter3inv(ml):
 
     def condition_closure(hook):
         ast.next_node(hook.old_next)
-        valid = sum((python.py_eval(condition) for (_label, condition, _block) in c3inv_sec_menu.items))
-        if valid > 1:
-            ast.next_node(c3inv_sec_menu)
+        if store.persistent.invevrything_four_chapter3_limit != True:
+            valid = sum((python.py_eval(condition) for (_label, condition, _block) in c3inv_sec_menu.items))
+            if valid > 1:
+                ast.next_node(c3inv_sec_menu)
         return True
 
     elsebranch = if_block.branch_else()
@@ -56,15 +58,16 @@ def chapter3archiveinv(ml):
         .search_if('c3arcquesx <= 1')
         .branch()
         .search_menu()
-        .add_choice("That's everything I want to do here.", condition='c3arcquesx > 0', jump="invevrything_four_c3arcques_complete")
+        .add_choice("That's everything I want to do here.", condition='c3arcquesx > 0 and persistent.invevrything_four_police_archive_limit != True', jump="invevrything_four_c3arcques_complete")
         .node
     )
 
     def condition_closure(hook):
         ast.next_node(hook.old_next)
-        valid = sum((python.py_eval(condition) for (_label, condition, _block) in c3arcinv_sec_menu.items))
-        if valid > 1:
-            ast.next_node(c3arcinv_sec_menu)
+        if store.persistent.invevrything_four_police_archive_limit != True:
+            valid = sum((python.py_eval(condition) for (_label, condition, _block) in c3arcinv_sec_menu.items))
+            if valid > 1:
+                ast.next_node(c3arcinv_sec_menu)
         return True
 
     ml.utils._create_hook(node_from=label.node, func=condition_closure)
@@ -83,9 +86,10 @@ def chapter4inv(ml):
 
     def condition_closure(hook):
         ast.next_node(hook.old_next)
-        valid = sum((python.py_eval(condition) for (_label, condition, _block) in c4inv_sec_menu.items))
-        if valid > 1:
-            ast.next_node(c4inv_sec_menu)
+        if store.persistent.invevrything_four_chapter4_limit != True:
+            valid = sum((python.py_eval(condition) for (_label, condition, _block) in c4inv_sec_menu.items))
+            if valid > 1:
+                ast.next_node(c4inv_sec_menu)
         return True
 
     elsebranch = if_block.branch_else()
