@@ -23,7 +23,7 @@ def chapter2inv(ml):
 
     c2inv_cont = ml.find_label('chap2cont').node
 
-    ml.utils._create_hook(node_from=c2inv_cont, node_to=c2inv_sec_menu, func=condition_closure)
+    ml.ast_link.utils._create_hook(node_from=c2inv_cont, node_to=c2inv_sec_menu, func=condition_closure)
 
 def chapter3inv(ml):
     if_block = ( ml
@@ -49,7 +49,7 @@ def chapter3inv(ml):
 
     elsebranch = if_block.branch_else()
     old_next = elsebranch.first().node
-    elsebranch._add_node_front(ml.utils._create_hook(node_to=c3inv_sec_menu, func=condition_closure, old_next=old_next))
+    elsebranch._add_node_front(ml.ast_link.utils._create_hook(node_to=c3inv_sec_menu, func=condition_closure, old_next=old_next))
 
 def chapter3archiveinv(ml):
     label = ml.find_label('c3arcques')
@@ -70,7 +70,7 @@ def chapter3archiveinv(ml):
                 ast.next_node(c3arcinv_sec_menu)
         return True
 
-    ml.utils._create_hook(node_from=label.node, func=condition_closure)
+    ml.ast_link.utils._create_hook(node_from=label.node, func=condition_closure)
 
 def chapter4inv(ml):
     if_block = ( ml
@@ -94,7 +94,7 @@ def chapter4inv(ml):
 
     elsebranch = if_block.branch_else()
     old_next = elsebranch.first().node
-    elsebranch._add_node_front(ml.utils._create_hook(node_to=c4inv_sec_menu, func=condition_closure, old_next=old_next))
+    elsebranch._add_node_front(ml.ast_link.utils._create_hook(node_to=c4inv_sec_menu, func=condition_closure, old_next=old_next))
 
     ( ml.find_label('c4rest')
         .search_scene('office')
