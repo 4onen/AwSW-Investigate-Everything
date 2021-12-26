@@ -1,7 +1,7 @@
 
 from renpy import ast, python, store
 
-from modloader import modinfo
+from modloader import modinfo, modast
 from modloader.modclass import Mod, loadable_mod
 
 def chapter2inv(ml):
@@ -23,7 +23,10 @@ def chapter2inv(ml):
 
     c2inv_cont = ml.find_label('chap2cont').node
 
-    ml.ast_link.utils._create_hook(node_from=c2inv_cont, node_to=c2inv_sec_menu, func=condition_closure)
+    hook = modast.ASTHook(("InvestigateEverything", 20), condition_closure, c2inv_cont)
+    hook.old_next = c2inv_cont.next
+    hook.next = hook.old_next
+    c2inv_cont.next = hook
 
 def chapter3inv(ml):
     if_block = ( ml
@@ -48,8 +51,10 @@ def chapter3inv(ml):
         return True
 
     elsebranch = if_block.branch_else()
-    old_next = elsebranch.first().node
-    elsebranch._add_node_front(ml.ast_link.utils._create_hook(node_to=c3inv_sec_menu, func=condition_closure, old_next=old_next))
+    hook = modast.ASTHook(("InvestigateEverything", 30), condition_closure)
+    hook.old_next = elsebranch.first().node
+    hook.next = hook.old_next
+    elsebranch._add_node_front(hook)
 
 def chapter3archiveinv(ml):
     label = ml.find_label('c3arcques')
@@ -70,7 +75,10 @@ def chapter3archiveinv(ml):
                 ast.next_node(c3arcinv_sec_menu)
         return True
 
-    ml.ast_link.utils._create_hook(node_from=label.node, func=condition_closure)
+    hook = modast.ASTHook(("InvestigateEverything", 31), condition_closure, label.node, "InvestigateEverythingChap3Arc")
+    hook.old_next = label.node.next
+    label.node.next = hook
+
 
 def chapter4inv(ml):
     if_block = ( ml
@@ -93,8 +101,10 @@ def chapter4inv(ml):
         return True
 
     elsebranch = if_block.branch_else()
-    old_next = elsebranch.first().node
-    elsebranch._add_node_front(ml.ast_link.utils._create_hook(node_to=c4inv_sec_menu, func=condition_closure, old_next=old_next))
+    hook = modast.ASTHook(("InvestigateEverything", 40), condition_closure)
+    hook.old_next = elsebranch.first().node
+    hook.next = hook.old_next
+    elsebranch._add_node_front(hook)
 
     ( ml.find_label('c4rest')
         .search_scene('office')
