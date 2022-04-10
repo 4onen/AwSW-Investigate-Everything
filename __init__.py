@@ -9,7 +9,7 @@ import jz_magmalink as ml
 def chapter1inv_skip():
     ( ml.find_label('investigation')
         .search_menu("I guess so.")
-        .add_choice("Don't say anything. Just let me draw conclusions.", jump='invevrything_four_c1skip')
+        .add_choice("Don't say anything. Just let me draw conclusions.", jump='invevrything_four_c1skip', condition='persistent.c1invhigh')
     )
 
     ( ml.find_label('quest6')
