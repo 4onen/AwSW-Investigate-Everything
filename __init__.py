@@ -4,7 +4,9 @@ from renpy import ast, python, store
 from modloader import modinfo, modast
 from modloader.modclass import Mod, loadable_mod
 
-def chapter2inv(ml):
+import jz_magmalink as ml
+
+def chapter2inv():
     c2inv_sec_menu = ( ml
         .find_label('chapter2sections')
         .search_if('chapter2sectionsplayed == 1')
@@ -28,7 +30,7 @@ def chapter2inv(ml):
     hook.next = hook.old_next
     c2inv_cont.next = hook
 
-def chapter3inv(ml):
+def chapter3inv():
     if_block = ( ml
         .find_label('c3sections')
         .search_if('c3sectionsplayed == 1')
@@ -56,7 +58,7 @@ def chapter3inv(ml):
     hook.next = hook.old_next
     elsebranch._add_node_front(hook)
 
-def chapter3archiveinv(ml):
+def chapter3archiveinv():
     label = ml.find_label('c3arcques')
 
     c3arcinv_sec_menu = ( label
@@ -80,7 +82,7 @@ def chapter3archiveinv(ml):
     label.node.next = hook
 
 
-def chapter4inv(ml):
+def chapter4inv():
     if_block = ( ml
         .find_label('c4sections')
         .search_if('c4sectionsplayed == 1')
@@ -121,12 +123,11 @@ class MyAwSWMod(Mod):
 
     @classmethod
     def mod_load(cls):
-        ml = modinfo.get_mods()["MagmaLink"].import_ml()
         ml.register_mod_settings(cls, screen='invevrything_four_modsettings')
-        chapter2inv(ml)
-        chapter3inv(ml)
-        chapter3archiveinv(ml)
-        chapter4inv(ml)
+        chapter2inv()
+        chapter3inv()
+        chapter3archiveinv()
+        chapter4inv()
 
     @staticmethod
     def mod_complete():
