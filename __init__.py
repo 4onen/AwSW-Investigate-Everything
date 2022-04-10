@@ -6,6 +6,17 @@ from modloader.modclass import Mod, loadable_mod
 
 import jz_magmalink as ml
 
+def chapter1inv_skip():
+    ( ml.find_label('investigation')
+        .search_menu("I guess so.")
+        .add_choice("Don't say anything. Just let me draw conclusions.", jump='invevrything_four_c1skip')
+    )
+
+    ( ml.find_label('quest6')
+        .search_say("Hm. I think that's about everything.")
+        .link_behind_from('invevrything_four_c1skip_end')
+    )
+
 def chapter2inv():
     c2inv_sec_menu = ( ml
         .find_label('chapter2sections')
@@ -124,6 +135,7 @@ class MyAwSWMod(Mod):
     @classmethod
     def mod_load(cls):
         ml.register_mod_settings(cls, screen='invevrything_four_modsettings')
+        chapter1inv_skip()
         chapter2inv()
         chapter3inv()
         chapter3archiveinv()

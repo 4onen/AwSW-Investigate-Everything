@@ -43,6 +43,93 @@ init:
             imagebutton idle "image/ui/close_idle.png" hover "image/ui/close_hover.png" action [Show("_ml_mod_settings"), Play("audio", "se/sounds/close.ogg")] hovered Play("audio", "se/sounds/select.ogg") style "smallwindowclose" at nav_button
 
 
+label invevrything_four_c1skip:
+    $ renpy.pause (0.0)
+    stop music fadeout 1.0
+    Br brow b "..."
+
+    play sound "fx/sheet.wav"
+
+    scene black with dissolve
+    $ renpy.pause (0.5)
+    scene deadbody at Pan ((0, 1080), (0, 350), 10) with dissolveslow
+    $ renpy.pause (10.0)
+
+    play sound "fx/unroll.ogg"
+    show invest with wiperightquick
+
+    play sound "fx/unroll.ogg"
+    show start with wipeleftquick
+
+    $ renpy.pause (0.5)
+    play music "mx/investigation.ogg"
+    $ renpy.pause (0.5)
+
+    hide invest
+    hide start
+    with dissolvemed
+
+    $ renpy.pause (0.5)
+
+    m "Two wings, two legs, just like the waitress in the café. About as big as a human, length-wise, if not slightly taller. The wingspan would certainly look impressive at that size."
+
+    show deadbody at Position(xpos = 0, xanchor=0, ypos=-1000, yanchor=0) with ease
+
+    show deadbodywounds at Pan ((0, 1000), (0, 1000), 0) with dissolvequick
+    $ renpy.pause (0.5)
+    hide deadbodywounds with dissolvequick
+    show deadbodywounds at Pan ((0, 1000), (0, 1000), 0) with dissolvequick
+    $ renpy.pause (0.5)
+    hide deadbodywounds with dissolvequick
+
+    show deadbody at Position(xpos = 0, xanchor=0, ypos=-350, yanchor=0) with ease
+
+    $ renpy.pause (1.0)
+
+    show deadbodywounds at Pan ((0, 350), (0, 350), 0) with dissolvequick
+    $ renpy.pause (0.5)
+    hide deadbodywounds with dissolvequick
+    show deadbodywounds at Pan ((0, 350), (0, 350), 0) with dissolvequick
+    $ renpy.pause (0.5)
+    hide deadbodywounds with dissolvequick
+    $ answers = 0
+    c "Those wounds were inflicted with a sharp instrument, not claws."
+    $ answers = 1
+    c "That means someone with hands wielded something like a knife against the victim."
+    $ answers = 2
+    c "This is a populated area. If it was Reza, he wouldn't use the gun instead because he doesn't want to make noise and attract attention."
+    $ answers = 3
+    
+    show deadbodyblood at Pan ((0, 350), (0, 350), 0) with dissolvequick
+    $ renpy.pause (0.5)
+    hide deadbodyblood with dissolvequick
+    show deadbodyblood at Pan ((0, 350), (0, 350), 0) with dissolvequick
+    $ renpy.pause (0.5)
+    hide deadbodyblood with dissolvequick
+
+    c "The blood pool came from the neck. Undisturbed. The victim likely died from lack of air before their blood flowed out from gravity."
+    $ answers = 4
+    c "They died here, too, or we'd see drag marks and there wouldn't be nearly so much blood pooled."
+    $ answers = 5
+    
+    show deadbodyteeth at Pan ((0, 350), (0, 350), 0) with dissolvequick
+    $ renpy.pause (0.5)
+    hide deadbodyteeth with dissolvequick
+    show deadbodyteeth at Pan ((0, 350), (0, 350), 0) with dissolvequick
+    $ renpy.pause (0.5)
+    hide deadbodyteeth with dissolvequick
+
+    c "If the victim died of suffocation, then, before the major blood loss, they wouldn't have that much in their mouth."
+    c "That could be the attacker's blood."
+    $ answers = 6
+
+    Br "I expect forensics already took a sample of it, so it might actually help us determine who the perpetrator is."
+    Br "Wow. I think that's about everything."
+
+    jump invevrything_four_c1skip_end
+
+
+
 label invevrything_four_c3arcques_complete:
     stop music fadeout 2.0
     $ renpy.pause (0.5)
