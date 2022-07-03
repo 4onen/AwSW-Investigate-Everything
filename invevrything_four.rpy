@@ -14,10 +14,11 @@ init:
                         Play("audio", "se/sounds/yes.wav")]
                 hovered Play("audio", "se/sounds/select.ogg")
                 focus_mask None
-            text label
+            text "[label]"
 
 
-    screen invevrything_four_modsettings tag smallscreen2:
+    screen invevrything_four_modsettings():
+        tag smallscreen2
         modal True
         window id "invevrything_four_modsettings" at popup2:
             style "smallwindow"
@@ -41,6 +42,8 @@ init:
                     use invevrything_four_checkbox("Chapter 4 limit", "invevrything_four_chapter4_limit")
                     null
             imagebutton idle "image/ui/close_idle.png" hover "image/ui/close_hover.png" action [Show("_ml_mod_settings"), Play("audio", "se/sounds/close.ogg")] hovered Play("audio", "se/sounds/select.ogg") style "smallwindowclose" at nav_button
+
+
 
 
 label invevrything_four_c1skip:
