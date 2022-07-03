@@ -16,6 +16,30 @@ init:
                 focus_mask None
             text "[label]"
 
+    python:
+        @renpy.pure
+        class invevrything_four_SetManyPersistent(Action, FieldEquality):
+            identity_fields = ['value']
+            equality_fields = ['fields']
+
+            def __init__(self, fields, value):
+                self.fields = fields
+                self.value = value
+
+            def __call__(self):
+                for field in self.fields:
+                    setattr(persistent, field, self.value)
+                renpy.save_persistent()
+                renpy.restart_interaction()
+
+            def get_selected(self):
+                for field in self.fields:
+                    if not (getattr(persistent, field) == self.value):
+                        return False
+                return True
+
+    define invevrything_four_modsettings_enable_all = [Play("audio", "se/sounds/open.ogg"), invevrything_four_SetManyPersistent(("invevrything_four_chapter2_limit","invevrything_four_chapter3_limit","invevrything_four_chapter4_limit","invevrything_four_police_archive_limit"),True)]
+    define invevrything_four_modsettings_disable_all = [Play("audio", "se/sounds/open.ogg"), invevrything_four_SetManyPersistent(("invevrything_four_chapter2_limit","invevrything_four_chapter3_limit","invevrything_four_chapter4_limit","invevrything_four_police_archive_limit"),False)]
 
     screen invevrything_four_modsettings():
         tag smallscreen2
@@ -29,8 +53,8 @@ init:
                 hbox:
                     xalign 0.5
                     spacing 40
-                    textbutton _("Enable all") action [Play("audio", "se/sounds/open.ogg"), MTSSetPersistent("invevrything_four_chapter2_limit",True), MTSSetPersistent("invevrything_four_chapter3_limit",True), MTSSetPersistent("invevrything_four_chapter4_limit",True), MTSSetPersistent("invevrything_four_police_archive_limit",True)] hovered Play("audio", "se/sounds/select.ogg") style "menubutton"
-                    textbutton _("Disable all") action [Play("audio", "se/sounds/open.ogg"), MTSSetPersistent("invevrything_four_chapter2_limit",False), MTSSetPersistent("invevrything_four_chapter3_limit",False), MTSSetPersistent("invevrything_four_chapter4_limit",False), MTSSetPersistent("invevrything_four_police_archive_limit",False)] hovered Play("audio", "se/sounds/select.ogg") style "menubutton"
+                    textbutton _("Enable all") action invevrything_four_modsettings_enable_all hovered Play("audio", "se/sounds/select.ogg") style "menubutton"
+                    textbutton _("Disable all") action invevrything_four_modsettings_disable_all hovered Play("audio", "se/sounds/select.ogg") style "menubutton"
                 grid 3 2:
                     align (0.5, 0.5)
                     transpose True
