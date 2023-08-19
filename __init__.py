@@ -85,6 +85,18 @@ def chapter3inv(ml):
     hook.next = hook.old_next
     elsebranch._add_node_front(hook)
 
+    condition = ml.find_label('c3go').search_if('c3clues == 2')
+    ( condition
+        .branch()
+        .search_say("You did great today, [player_name]. The police department is glad to have you on our side.")
+        .link_from('invevrything_four_c3go_highinv')
+    )
+    condition.add_entry(
+        condition='c3clues > 2',
+        before='c3clues == 2',
+        jump='invevrything_four_c3go_highinv'
+    )
+
 def chapter3archiveinv(ml):
     label = ml.find_label('c3arcques')
 
