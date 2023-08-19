@@ -4,9 +4,7 @@ from renpy import ast, python, store
 from modloader import modinfo, modast
 from modloader.modclass import Mod, loadable_mod
 
-import jz_magmalink as ml
-
-def chapter1inv_skip():
+def chapter1inv_skip(ml):
     ( ml.find_label('investigation')
         .search_menu("I guess so.")
         .add_choice("Don't say anything. Just let me draw conclusions.", jump='invevrything_four_c1skip', condition='persistent.c1invhigh')
@@ -17,7 +15,7 @@ def chapter1inv_skip():
         .link_behind_from('invevrything_four_c1skip_end')
     )
 
-def chapter2inv():
+def chapter2inv(ml):
     c2inv_sec_menu = ( ml
         .find_label('chapter2sections')
         .search_if('chapter2sectionsplayed == 1')
@@ -59,7 +57,7 @@ def chapter2inv():
     )
     
 
-def chapter3inv():
+def chapter3inv(ml):
     if_block = ( ml
         .find_label('c3sections')
         .search_if('c3sectionsplayed == 1')
@@ -87,7 +85,7 @@ def chapter3inv():
     hook.next = hook.old_next
     elsebranch._add_node_front(hook)
 
-def chapter3archiveinv():
+def chapter3archiveinv(ml):
     label = ml.find_label('c3arcques')
 
     c3arcinv_sec_menu = ( label
@@ -111,7 +109,7 @@ def chapter3archiveinv():
     label.node.next = hook
 
 
-def chapter4inv():
+def chapter4inv(ml):
     if_block = ( ml
         .find_label('c4sections')
         .search_if('c4sectionsplayed == 1')
@@ -152,12 +150,14 @@ class MyAwSWMod(Mod):
 
     @classmethod
     def mod_load(cls):
+        import jz_magmalink as ml
+
         ml.register_mod_settings(cls, screen='invevrything_four_modsettings')
-        chapter1inv_skip()
-        chapter2inv()
-        chapter3inv()
-        chapter3archiveinv()
-        chapter4inv()
+        chapter1inv_skip(ml)
+        chapter2inv(ml)
+        chapter3inv(ml)
+        chapter3archiveinv(ml)
+        chapter4inv(ml)
 
     @staticmethod
     def mod_complete():
