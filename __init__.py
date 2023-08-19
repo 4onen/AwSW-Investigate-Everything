@@ -41,6 +41,24 @@ def chapter2inv():
     hook.next = hook.old_next
     c2inv_cont.next = hook
 
+    condition = ml.find_label('chap2skip3').search_if('chap2clues == 2')
+    ( condition
+        .branch()
+        .search_say("Well done, [player_name]. That gives us some solid points from which we can continue our investigation.")
+        .link_from('invevrything_four_c2skip3')
+        .hook_to(
+            'invevrything_four_c2skip3_highinv',
+            return_link=True,
+            condition='chap2clues > 2',
+        )
+    )
+    condition.add_entry(
+        condition='chap2clues > 2',
+        before='chap2clues == 2',
+        jump='invevrything_four_c2skip3'
+    )
+    
+
 def chapter3inv():
     if_block = ( ml
         .find_label('c3sections')

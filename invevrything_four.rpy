@@ -156,6 +156,14 @@ label invevrything_four_c1skip:
     jump invevrything_four_c1skip_end
 
 
+label invevrything_four_c2skip3_highinv:
+    Sb drop b "That's honestly a lot of places to have visited so fast."
+    if chap2clues > 3:
+        Sb smile b "Might even give me a run for my money."
+        c "Runner joke?"
+        Sb drop b "I'm not kidding."
+    jump invevrything_four_c2skip3_highinv_return
+
 
 label invevrything_four_c3arcques_complete:
     stop music fadeout 2.0
