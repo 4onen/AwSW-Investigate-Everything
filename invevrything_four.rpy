@@ -38,8 +38,14 @@ init:
                         return False
                 return True
 
-    define invevrything_four_modsettings_enable_all = [Play("audio", "se/sounds/open.ogg"), invevrything_four_SetManyPersistent(("invevrything_four_chapter2_limit","invevrything_four_chapter3_limit","invevrything_four_chapter4_limit","invevrything_four_police_archive_limit"),True)]
-    define invevrything_four_modsettings_disable_all = [Play("audio", "se/sounds/open.ogg"), invevrything_four_SetManyPersistent(("invevrything_four_chapter2_limit","invevrything_four_chapter3_limit","invevrything_four_chapter4_limit","invevrything_four_police_archive_limit"),False)]
+    define invevrything_four_modsettings_enable_all = [
+        Play("audio", "se/sounds/open.ogg"),
+        invevrything_four_SetManyPersistent(("invevrything_four_chapter2_limit","invevrything_four_chapter3_limit","invevrything_four_chapter4_limit","invevrything_four_police_archive_limit", "invevrything_four_chapter1_character_limit", "invevrything_four_chapter2_character_limit", "invevrything_four_chapter3_character_limit", "invevrything_four_chapter4_character_limit"),True),
+    ]
+    define invevrything_four_modsettings_disable_all = [
+        Play("audio", "se/sounds/open.ogg"),
+        invevrything_four_SetManyPersistent(("invevrything_four_chapter2_limit","invevrything_four_chapter3_limit","invevrything_four_chapter4_limit","invevrything_four_police_archive_limit", "invevrything_four_chapter1_character_limit", "invevrything_four_chapter2_character_limit", "invevrything_four_chapter3_character_limit", "invevrything_four_chapter4_character_limit"),False),
+    ]
 
     screen invevrything_four_modsettings():
         tag smallscreen2
@@ -55,16 +61,22 @@ init:
                     spacing 40
                     textbutton _("Enable all") action invevrything_four_modsettings_enable_all hovered Play("audio", "se/sounds/select.ogg") style "menubutton"
                     textbutton _("Disable all") action invevrything_four_modsettings_disable_all hovered Play("audio", "se/sounds/select.ogg") style "menubutton"
-                grid 3 2:
+                grid 4 3:
                     align (0.5, 0.5)
                     transpose True
                     spacing 10
+                    null
+                    null
+                    use invevrything_four_checkbox("Chapter 1 dates", "invevrything_four_chapter1_character_limit")
                     use invevrything_four_checkbox("Chapter 2 limit", "invevrything_four_chapter2_limit")
                     null
+                    use invevrything_four_checkbox("Chapter 2 dates", "invevrything_four_chapter2_character_limit")
                     use invevrything_four_checkbox("Chapter 3 limit", "invevrything_four_chapter3_limit")
                     use invevrything_four_checkbox("Police Archive limit", "invevrything_four_police_archive_limit")
+                    use invevrything_four_checkbox("Chapter 3 dates", "invevrything_four_chapter3_character_limit")
                     use invevrything_four_checkbox("Chapter 4 limit", "invevrything_four_chapter4_limit")
                     null
+                    use invevrything_four_checkbox("Chapter 4 dates", "invevrything_four_chapter4_character_limit")
             imagebutton idle "image/ui/close_idle.png" hover "image/ui/close_hover.png" action [Show("_ml_mod_settings"), Play("audio", "se/sounds/close.ogg")] hovered Play("audio", "se/sounds/select.ogg") style "smallwindowclose" at nav_button
 
 

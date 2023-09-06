@@ -153,6 +153,51 @@ def chapter4inv(ml):
     )
 
 
+def chapter1char(ml):
+    c1if = (
+        ml.find_label('chapter1chars')
+        .search_if('chapter1csplayed == 1')
+    )
+
+    c1if.branch().search_scene('black').link_from('invevrything_four_c1char')
+    c1if.add_entry('not store.persistent.invevrything_four_chapter1_character_limit', jump='invevrything_four_c1char', before='True')
+
+def chapter2char(ml):
+    c2if = (
+        ml.find_label("chapter2chars")
+        .search_if("playmessage == True")
+        .search_if("chapter2csplayed == 1")
+    )
+
+    c2if.branch().search_say("(Nothing going on today. Guess I can do whatever.)").link_from('invevrything_four_c2char')
+    c2if.add_entry('not store.persistent.invevrything_four_chapter2_character_limit', jump='invevrything_four_c2char', before='True')
+
+def chapter3char(ml):
+    c3if = (
+        ml.find_label("chapter3chars")
+        .search_if("playmessage == True")
+        .search_if("c3csplayed == 1")
+    )
+
+    c3if.branch().search_say("(Looks like I have some free time today.)").link_from('invevrything_four_c3char')
+    c3if.add_entry('not store.persistent.invevrything_four_chapter3_character_limit', jump='invevrything_four_c3char', before='True')
+
+def chapter4char(ml):
+    c4if = (
+        ml.find_label("chapter4chars")
+        .search_if("playmessage == True")
+        .search_if("c4csplayed == 1")
+    )
+
+    c4if.branch().search_say("(Another free day. Yay me.)").link_from('invevrything_four_c4char')
+    c4if.add_entry('not store.persistent.invevrything_four_chapter4_character_limit', jump='invevrything_four_c4char', before='True')
+
+def chapter_chars(ml):
+    chapter1char(ml)
+    chapter2char(ml)
+    chapter3char(ml)
+    chapter4char(ml)
+
 @loadable_mod
 class MyAwSWMod(Mod):
     name = "Investigate Everything"
@@ -170,6 +215,7 @@ class MyAwSWMod(Mod):
         chapter3inv(ml)
         chapter3archiveinv(ml)
         chapter4inv(ml)
+        chapter_chars(ml)
 
     @staticmethod
     def mod_complete():
