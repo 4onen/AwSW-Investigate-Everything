@@ -163,9 +163,16 @@ def chapter1char(ml):
     c1if.add_entry('not store.persistent.invevrything_four_chapter1_character_limit', jump='invevrything_four_c1char', before='True')
 
 def chapter2char(ml):
-    c2if = (
+    c2fadeif = (
         ml.find_label("chapter2chars")
-        .search_if("playmessage == True")
+        .search_if("chapter2csplayed == 1")
+    )
+
+    c2fadeif.branch().search_scene('black').link_from('invevrything_four_c2fade')
+    c2fadeif.add_entry('not store.persistent.invevrything_four_chapter2_character_limit', jump='invevrything_four_c2fade', before='True')
+
+    c2if = (
+        c2fadeif
         .search_if("chapter2csplayed == 1")
     )
 
@@ -173,9 +180,16 @@ def chapter2char(ml):
     c2if.add_entry('not store.persistent.invevrything_four_chapter2_character_limit', jump='invevrything_four_c2char', before='True')
 
 def chapter3char(ml):
-    c3if = (
+    c3fadeif = (
         ml.find_label("chapter3chars")
-        .search_if("playmessage == True")
+        .search_if("c3csplayed == 1")
+    )
+
+    c3fadeif.branch().search_scene('black').link_from('invevrything_four_c3fade')
+    c3fadeif.add_entry('not store.persistent.invevrything_four_chapter3_character_limit', jump='invevrything_four_c3fade', before='True')
+
+    c3if = (
+        c3fadeif
         .search_if("c3csplayed == 1")
     )
 
@@ -183,9 +197,16 @@ def chapter3char(ml):
     c3if.add_entry('not store.persistent.invevrything_four_chapter3_character_limit', jump='invevrything_four_c3char', before='True')
 
 def chapter4char(ml):
-    c4if = (
+    c4fadeif = (
         ml.find_label("chapter4chars")
-        .search_if("playmessage == True")
+        .search_if("c4csplayed == 1")
+    )
+
+    c4fadeif.branch().search_scene('black').link_from('invevrything_four_c4fade')
+    c4fadeif.add_entry('not store.persistent.invevrything_four_chapter4_character_limit', jump='invevrything_four_c4fade', before='True')
+
+    c4if = (
+        c4fadeif
         .search_if("c4csplayed == 1")
     )
 
