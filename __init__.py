@@ -188,13 +188,32 @@ def chapter3char(ml):
     c3fadeif.branch().search_scene('black').link_from('invevrything_four_c3fade')
     c3fadeif.add_entry('not store.persistent.invevrything_four_chapter3_character_limit', jump='invevrything_four_c3fade', before='True')
 
-    c3if = (
+    c3alldeadif = (
         c3fadeif
+        .search_if("remyavailable == False")
+    )
+
+    c3alldeadif.link_behind_from('invevrything_four_c3charnotalldead')
+        
+    ( c3alldeadif.branch()
+        .search_if("bryceavailable == False").branch()
+        .search_if("adineavailable == False").branch()
+        .search_if("adine1unplayed == False").branch()
+        .search_if("annaavailable == False").branch()
+        .search_if("loremavailable == False").branch()
+        .search_if("katsuavailable == False").branch()
+        .hook_to('invevrything_four_c3charnotalldead', return_link=False, condition='not store.persistent.invevrything_four_chapter3_character_limit')
+    )
+
+    c3if = (
+        c3alldeadif
         .search_if("c3csplayed == 1")
     )
 
     c3if.branch().search_say("(Looks like I have some free time today.)").link_from('invevrything_four_c3char')
     c3if.add_entry('not store.persistent.invevrything_four_chapter3_character_limit', jump='invevrything_four_c3char', before='True')
+
+    ml.find_label('chapter3chars2').hook_to('chapter3chars', return_link=False, condition='c3csplayed > 1 and not store.persistent.invevrything_four_chapter3_character_limit')
 
 def chapter4char(ml):
     c4fadeif = (
